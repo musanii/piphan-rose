@@ -14,11 +14,29 @@ class Student extends Model
     protected $fillable = [
         'published',
         'title',
-        'description',
+        'registration_type',
+        'grade_level',
+        'performance_summary'
     ];
     
     public $slugAttributes = [
         'title',
     ];
+
+    public $mediasParams = [
+        'profile_image' => [
+            'default' => [
+                [
+                    'name' => 'default',
+                    'ratio' => 1, // Forces a perfect square for profile pics
+                ],
+            ],
+        ],
+    ];
+
+public function finances()
+    {
+        return $this->hasMany(Finance::class);
+    }
     
 }

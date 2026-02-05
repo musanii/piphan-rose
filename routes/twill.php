@@ -10,3 +10,4 @@ TwillRoutes::module('students');
 TwillRoutes::module('finances');
 TwillRoutes::module('activities');
 TwillRoutes::module('staff');
+TwillRoutes::singleton('homepage');

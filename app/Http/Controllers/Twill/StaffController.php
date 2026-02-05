@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Twill;
 
 use A17\Twill\Models\Contracts\TwillModelContract;
+use A17\Twill\Services\Forms\Fields\Medias;
+use A17\Twill\Services\Forms\Fields\Select;
+use A17\Twill\Services\Forms\Options;
+use A17\Twill\Services\Listings\Columns\Image;
 use A17\Twill\Services\Listings\Columns\Text;
 use A17\Twill\Services\Listings\TableColumns;
 use A17\Twill\Services\Forms\Fields\Input;
@@ -27,9 +31,34 @@ class StaffController extends BaseModuleController
     {
         $form = parent::getForm($model);
 
+
+         $form->add(
+        Medias::make()
+            ->name('profile_image')
+            ->label('Profile Picture')
+            ->note('Please use a clear, square headshot.')
+    );
         $form->add(
-            Input::make()->name('description')->label('Description')
-        );
+        Input::make()
+            ->name('position')
+            ->label('Job Title / Position')
+            ->placeholder('e.g. Senior Math Teacher')
+    );
+
+    $form->add(
+        Select::make()
+            ->name('department')
+            ->label('Department')
+            ->options(Options::make([
+                ['value' => 'humanities', 'label' => 'Humanities'],
+                ['value' => 'sciences', 'label' => 'Sciences & Math'],
+                ['value' => 'languages', 'label' => 'Languages'],
+                ['value' => 'administration', 'label' => 'Administration'],
+                ['value' => 'support', 'label' => 'Support Staff'],
+            ]))
+    );
+
+      
 
         return $form;
     }
@@ -42,8 +71,20 @@ class StaffController extends BaseModuleController
         $table = parent::additionalIndexTableColumns();
 
         $table->add(
-            Text::make()->field('description')->title('Description')
-        );
+        Image::make()
+            ->field('profile_image')
+            ->title('Photo')
+            ->rounded() 
+            //->width(50)
+    );
+
+        $table->add(
+        Text::make()->field('position')->title('Role')
+    );
+
+    $table->add(
+        Text::make()->field('department')->title('Department')
+    );
 
         return $table;
     }

@@ -14,7 +14,8 @@ class Activity extends Model
     protected $fillable = [
         'published',
         'title',
-        'description',
+        'category',
+        'schedule_info'
     ];
     
     public $slugAttributes = [

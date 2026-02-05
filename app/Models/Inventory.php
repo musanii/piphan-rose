@@ -13,7 +13,8 @@ class Inventory extends Model
     protected $fillable = [
         'published',
         'title',
-        'description',
+        'quantity',
+        'unit'
     ];
     
     public $slugAttributes = [

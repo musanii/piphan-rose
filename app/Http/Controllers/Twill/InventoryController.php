@@ -18,6 +18,9 @@ class InventoryController extends BaseModuleController
     protected function setUpController(): void
     {
     }
+    
+
+    
 
     /**
      * See the table builder docs for more information. If you remove this method you can use the blade files.
@@ -49,14 +52,30 @@ class InventoryController extends BaseModuleController
     /**
      * This is an example and can be removed if no modifications are needed to the table.
      */
-    protected function additionalIndexTableColumns(): TableColumns
-    {
-        $table = parent::additionalIndexTableColumns();
+  protected function getIndexTableColumns(): TableColumns
+{
+    $table = parent::getIndexTableColumns();
 
-        $table->add(
-            Text::make()->field('description')->title('Description')
-        );
+    // 1. Show the Current Quantity
+    $table->add(
+        Text::make()->field('quantity')->title('Current Stock')
+    );
 
-        return $table;
-    }
+    // 2. Show the Unit (kg, bags, etc.)
+    $table->add(
+        Text::make()->field('unit')->title('Unit')
+    );
+
+    // 3. The "Classy" Status Alert
+    $table->add(
+        Text::make()->field('status')->title('Inventory Status')->customRender(function ($inventory) {
+            if ($inventory->quantity <= $inventory->reorder_level) {
+                return '<span style="color: #d32f2f; font-weight: bold;">⚠️ LOW STOCK</span>';
+            }
+            return '<span style="color: #2e7d32; font-weight: bold;">✅ OK</span>';
+        })
+    );
+
+    return $table;
+}
 }

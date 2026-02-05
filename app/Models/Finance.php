@@ -13,11 +13,19 @@ class Finance extends Model
     protected $fillable = [
         'published',
         'title',
-        'description',
+        'student_id',
+        'amount',
+        'type',
+        'total_due',
+        'amount_paid'
     ];
     
     public $slugAttributes = [
         'title',
     ];
+
+    public function student() {
+    return $this->belongsTo(Student::class);
+}
     
 }

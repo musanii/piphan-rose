@@ -13,11 +13,24 @@ class Staff extends Model
     protected $fillable = [
         'published',
         'title',
-        'description',
+        'position',
+        'email',
+        'department'
     ];
     
     public $slugAttributes = [
         'title',
+    ];
+
+    public $mediasParams = [
+        'profile_image' => [
+            'default' => [
+                [
+                    'name' => 'default',
+                    'ratio' => 1, // Forces a perfect square for profile pics
+                ],
+            ],
+        ],
     ];
     
 }
