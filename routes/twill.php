@@ -8,3 +8,5 @@ use A17\Twill\Facades\TwillRoutes;
 TwillRoutes::module('inventories');
 TwillRoutes::module('students');
 TwillRoutes::module('finances');
+TwillRoutes::module('activities');
+TwillRoutes::module('staff');

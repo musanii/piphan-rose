@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Twill;
 
 use A17\Twill\Models\Contracts\TwillModelContract;
-use A17\Twill\Services\Forms\Fields\Medias;
 use A17\Twill\Services\Forms\Fields\Select;
 use A17\Twill\Services\Forms\Options;
 use A17\Twill\Services\Listings\Columns\Text;
@@ -11,11 +10,10 @@ use A17\Twill\Services\Listings\TableColumns;
 use A17\Twill\Services\Forms\Fields\Input;
 use A17\Twill\Services\Forms\Form;
 use A17\Twill\Http\Controllers\Admin\ModuleController as BaseModuleController;
-use App\Models\Student;
 
-class FinanceController extends BaseModuleController
+class ActivityController extends BaseModuleController
 {
-    protected $moduleName = 'finances';
+    protected $moduleName = 'activities';
     /**
      * This method can be used to enable/disable defaults. See setUpController in the docs for available options.
      */
@@ -31,25 +29,19 @@ class FinanceController extends BaseModuleController
     {
         $form = parent::getForm($model);
 
-        // Dropdown to link this bill/statement to a student
-    $form->add(
+      $form->add(
         Select::make()
-            ->name('student_id')
-            ->label('Select Student')
-            ->options(
-                Options::make(Student::all()->map(function($student) {
-                    return ['value' => $student->id, 'label' => $student->title];
-                })->toArray())
-            )
+            ->name('category')
+            ->label('Category')
+            ->options(Options::make([
+                ['value' => 'sports', 'label' => 'Sports'],
+                ['value' => 'club', 'label' => 'Clubs & Societies'],
+                ['value' => 'arts', 'label' => 'Creative Arts'],
+            ]))
     );
 
-        $form->add(
-        Input::make()->name('amount')->label('Total Amount')->type('number')
-    );
-
-    // The File Upload for Statements
     $form->add(
-        Medias::make()->name('statement_file')->label('Upload Statement (PDF/Image)')
+        Input::make()->name('schedule_info')->label('Meeting Times')
     );
 
         return $form;

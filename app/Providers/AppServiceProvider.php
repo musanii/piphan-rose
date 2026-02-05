@@ -21,18 +21,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-          TwillNavigation::addLink(
-        NavigationLink::make()->forModule('students')->title('Admissions')
-        );
         TwillNavigation::addLink(
-            NavigationLink::make()
-            ->forModule('inventories')
-            ->title('Food Inventory')
+            NavigationLink::make()->forModule('students')->title('Admissions')
         );
+
         TwillNavigation::addLink(
-        NavigationLink::make()->forModule('finances')
-    );
-       
+            NavigationLink::make()->forModule('finances')->title('Finance Hub')
+        );
+
+        TwillNavigation::addLink(
+            NavigationLink::make()->forModule('staff')->title('Faculty')
+        );
+
+        TwillNavigation::addLink(
+            NavigationLink::make()->forModule('activities')->title('Extracurricular')
+        );
+
+        TwillNavigation::addLink(
+            NavigationLink::make()->forModule('inventories')->title('Food Inventory')
+        );
 
     }
 }

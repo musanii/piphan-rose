@@ -35,6 +35,14 @@ class InventoryController extends BaseModuleController
             Input::make()->name('unit')->label('Unit of Measurement (e.g., kg, Bags)')
         );
 
+        $form->add(
+        Input::make()
+            ->name('reorder_level')
+            ->label('Low Stock Alert Level')
+            ->note('We will highlight this item if stock falls below this number.')
+            ->type('number')
+    );
+
         return $form;
     }
 
